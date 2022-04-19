@@ -4,15 +4,15 @@ age = int(st[1])
 
 answer = 'Привет, ' + name + '! Тебе ' + str(age) + ' лет.'
 additional = ''
-if age < 14:
+if age <= 0:
+    answer = 'Ошибка: Возраст не может быть равен числу ' + str(age)
+elif age < 14:
     answer = 'Ошибка: Минимальный возраст — 14 лет.'
 elif len(name) < 3:
     if len(name) == 0:
         answer = 'Ошибка: пустое имя.'
     else:
         answer = 'Ошибка: В имени должно быть минимум 3 символа.'
-elif age <= 0:
-    answer = 'Ошибка: Возраст не может быть равен числу ' + str(age)
 else:
     if 16 <= age <= 17:
         additional = ' Не забудь получить ваш первый паспорт!'
