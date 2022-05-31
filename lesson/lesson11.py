@@ -1,4 +1,3 @@
-# -*- coding: utf8 -*-
 from abc import ABC
 import json
 from dataclasses import dataclass
@@ -11,6 +10,7 @@ class CarBase(ABC):
     _current_speed: int = 0
     max_speed: int = 100
 
+    @property
     def current_speed(self):
         return self._current_speed
 
@@ -30,6 +30,21 @@ class CarBase(ABC):
 
     def auto_parking(self):
         pass
+
+    def __lt__(self, other):
+        return self.age < other.age
+
+    def __gt__(self, other):
+        return self.age > other.age
+
+    def __le__(self, other):
+        return self.age <= other.age
+
+    def __ge__(self, other):
+        return self.age >= other.age
+
+    def __eq__(self, other):
+        return self.age == other.age
 
 
 @dataclass
@@ -54,6 +69,7 @@ class Mazda(CarBase):
 
 @dataclass
 class Mercedes(CarBase):
+    name = 'Дорогая тачка'
     max_speed: int = 250
     age: int = 5
     color: str = 'золотой'
@@ -65,6 +81,14 @@ class Mercedes(CarBase):
 
     def auto_parking(self):
         return f'Машина припаркуется сама.'
+
+    @staticmethod
+    def find_petrol_station():
+        print('Мне нужен бензин и я его найду!')
+
+    @classmethod
+    def say_expensive(cls):
+        print('Привет! Я очень', cls.name)
 
 
 class Airplane(ABC):
@@ -138,7 +162,7 @@ def automatic_file_json():
     mazda = Mazda()
     mercedes = Mercedes()
     with open('data.json', 'w') as file:
-        m_data = {'info': mazda.info(), 'speed': mercedes.current_speed()}
+        m_data = {'info': mazda.info(), 'speed': mercedes.current_speed}
         json.dump(m_data, file)
 
 
@@ -156,7 +180,7 @@ for transport in (auto1, auto2, plane1, plane2):
 print('Идет запись в json...')
 print('.........................')
 with open('data.json', 'w') as f:
-    auto_data = {'info': auto1.info(), 'speed': auto1.current_speed()}
+    auto_data = {'info': auto1.info(), 'speed': auto1.current_speed}
     json.dump(auto_data, f)
 
 print('json file готов!')
