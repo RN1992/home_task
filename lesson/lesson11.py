@@ -160,9 +160,8 @@ class Airbus(Airplane):
 
 def automatic_file_json():
     mazda = Mazda()
-    mercedes = Mercedes()
     with open('data.json', 'w') as file:
-        m_data = {'info': mazda.info(), 'speed': mercedes.current_speed}
+        m_data = {'info': mazda.info(), 'speed': mazda.current_speed}
         json.dump(m_data, file)
 
 
