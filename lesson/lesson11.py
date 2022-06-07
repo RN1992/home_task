@@ -190,9 +190,8 @@ print('.........................')
 with open('data.json') as f:
     try:
         data = json.load(f)
-        for i in data:
-            print(i, data[i], sep=':')
+        for key in data:
+            print(key, data[key], sep=':')
     except:
-        print('Что-то не так с файлом. Попробую создать свой =)\n.........................')
         automatic_file_json()
         print('Готово! Файл успешно создан!')
